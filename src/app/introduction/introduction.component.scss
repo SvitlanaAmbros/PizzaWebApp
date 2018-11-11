@@ -1,0 +1,171 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+@white: #fff;
+@yellow: #fff000;
+@dark-yellow: #fcc401;
+@black: #000;
+
+button {
+    cursor: pointer;
+    &:focus {
+        outline: none;
+        // background-color: #ecb804;
+    }
+}
+
+ul, li,p {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+    display: flex;
+    background:url('../../assets/img/pizza_cheese.jpg') no-repeat center top;
+    height: 94vh;
+    max-width: 1800px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &__menu {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+    }
+
+    &__message {
+        text-align: center;
+        color: white;
+        margin-top: 115px;
+
+        &_main {
+            font-size: 54px;
+            font-weight: 600;
+        }
+        &_addit {
+            margin: 60px 0;
+            font-size: 30px;
+            font-weight: 600;
+        }
+        // color: red;
+    }
+
+    &__order {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.order-btn {
+    width: 360px;
+    height: 43px;
+    border-radius: 50px;
+    border: none;
+    background: #fcc401;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+    }
+
+    &:hover {
+        outline: none;
+        background-color: #ecb804;
+    }
+    
+}
+
+.order-ring-btn {
+    width: 240px;
+    height: 38px;
+    border-radius: 10px;
+    border: none;
+    background: #fff000;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -30px;
+    margin-left: 10px;
+
+    &__text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+    }
+
+    &:hover {
+        outline: none;
+        background-color: #f1e302;
+    }
+}
+
+
+.yellow-text {
+    color: #fff000;
+}
+
+.img-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.logo-icon {
+    height: 160px;
+    width: 160px;
+    margin-top: -30px;
+}
+
+.darken-overlay{
+    width: 100%;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 45px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+
+    &-wrap {
+        width: 60%;
+        padding: 0 45px 30px;
+    }
+
+    &__item {
+        font-weight: 700;
+        font-size: 16px;
+        list-style-type: none;
+    }
+    
+    &__item a {
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+        
+    }
+	
+}
+
+
+
+
+
+
