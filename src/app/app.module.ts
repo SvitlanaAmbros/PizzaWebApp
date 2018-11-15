@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { ProductsComponent } from './products/products.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { CustomFooterComponent } from './custom-footer/custom-footer.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
     IntroductionComponent,
     ProductsComponent,
     RestaurantsComponent,
+    CustomFooterComponent,
   ],
   imports: [
     BrowserModule,
