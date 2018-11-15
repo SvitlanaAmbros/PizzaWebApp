@@ -4,3 +4,20 @@
 .product-wrap {
     padding: 45px 0 50px;
 }
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    padding: 17px;
+
+    &-wrap {
+        text-align: center;
+    }
+}
+
+.delimeter {
+    width: 100%;
+    height: 2px;
+    background: #fcc401;
+}
