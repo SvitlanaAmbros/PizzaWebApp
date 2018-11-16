@@ -39,11 +39,16 @@ button {
 .menu {
     display: flex;
     padding: 45px 35px;
+    cursor: pointer;
 
     &__item {
         margin-right: 50px;
         font-size: 18px;
         font-weight: bold;
+
+        &:hover {
+            color: #973800;
+        }
     }
 }
 
