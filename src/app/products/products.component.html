@@ -17,74 +17,33 @@
       <!-- EOF menu -->
 
       <!-- products -->
-      <div class="products">
 
+      <div class="products">
+        <div class="row d-flex justify-content-between">
           <!-- card info -->
-          <div class="card">
-            <div [ngStyle]="{'background-image': 'url(../../assets/img/' + customImg + ')',
-             'height':'200px', 'border-radius':'6px'}"
->
+          <div class="card col-lg-3" *ngFor="let pizza of pizzasInfo">
+            <div [ngStyle]="{'background-image': 'url(../../assets/img' + pizza.imgUrl + ')',
+             'height':'200px', 'border-radius':'6px'}">
             </div>
             <div class="card__pizza">
-              <p class="card__pizza__title">Пицца "Тарантино" </p>
-              <p class="card__pizza__ing">Ингридиенты: <br>помидоры, колбаски,
-                 куриное филе, моцарелла</p>
+              <p class="card__pizza__title">{{ pizza.name}}</p>
+              <p class="card__pizza__ing"><span 
+                  *ngFor="let ing of pizza.ingridients"> {{ ing }} </span></p>
             </div>
-            <div class="card__price">
+            <div class="card__price"  *ngFor="let portion of pizza.pricePerWeight">
                 <div class="card__price-weight">
                     <img class="pizza-icon" src="assets/img/pizza-icon.png" alt="">
-                    <p class="card__price-weight__value">500 гр</p>
+                    <p class="card__price-weight__value">{{ portion.size }} см</p>
                 </div>
-                <p class="card__price__value">300 грн</p>
+                <p class="card__price__value"> {{ portion.price }} грн</p>
             </div>
             <div>
-              <button class="card__order-btn">Заказать</button>
+              <button class="card__order-btn align-bottom">Заказать</button>
             </div>
           </div>
           <!-- EOF card info -->
-          <!-- card info -->
-          <div class="card">
-              <div class="card__img">
-                  <!-- <img class="pizza-icon" src="assets/img/pizza-icon.png" alt=""> -->
-              </div>
-              <div class="card__pizza">
-                <p class="card__pizza__title">Пицца "Тарантино" </p>
-                <p class="card__pizza__ing">Ингридиенты: <br>помидоры, колбаски,
-                   куриное филе, моцарелла</p>
-              </div>
-              <div class="card__price">
-                  <div class="card__price-weight">
-                      <img class="pizza-icon" src="assets/img/pizza-icon.png" alt="">
-                      <p class="card__price-weight__value">500 гр</p>
-                  </div>
-                  <p class="card__price__value">300 грн</p>
-              </div>
-              <div>
-                <button class="card__order-btn">Заказать</button>
-              </div>
-            </div>
-            <!-- EOF card info -->
-            <!-- card info -->
-          <div class="card">
-              <div class="card__img">
-              </div>
-              <div class="card__pizza">
-                <p class="card__pizza__title">Пицца "Тарантино" </p>
-                <p class="card__pizza__ing">Ингридиенты: <br>помидоры, колбаски,
-                   куриное филе, моцарелла</p>
-              </div>
-              <div class="card__price">
-                  <div class="card__price-weight">
-                      <img class="pizza-icon" src="assets/img/pizza-icon.png" alt="">
-                      <p class="card__price-weight__value">500 гр</p>
-                  </div>
-                  <p class="card__price__value">300 грн</p>
-              </div>
-              <div>
-                <button class="card__order-btn">Заказать</button>
-              </div>
-            </div>
-            <!-- EOF card info -->
+        </div>
+            
       </div>
       <!-- EOF products -->
 

@@ -8,6 +8,8 @@ import { ProductsComponent } from './products/products.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { CustomFooterComponent } from './custom-footer/custom-footer.component';
 
+import { HttpClientModule }   from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,8 @@ import { CustomFooterComponent } from './custom-footer/custom-footer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

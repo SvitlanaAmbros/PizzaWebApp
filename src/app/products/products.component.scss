@@ -84,12 +84,14 @@ button {
     justify-content: space-between;
 }
 
+
 .card {
-    height: 445px;
+    // height: 445px;
     width: 300px;
     border: 1px solid #dadada;
     box-shadow: 3px 3px 11px 0px #a6a6a6;
     border-radius: 6px;
+    margin: 5px;
     
 
     // &__img {
