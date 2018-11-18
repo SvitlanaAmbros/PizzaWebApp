@@ -21,7 +21,9 @@
 
           <!-- card info -->
           <div class="card">
-            <div class="card__img">
+            <div [ngStyle]="{'background-image': 'url(../../assets/img/' + customImg + ')',
+             'height':'200px', 'border-radius':'6px'}"
+>
             </div>
             <div class="card__pizza">
               <p class="card__pizza__title">Пицца "Тарантино" </p>
