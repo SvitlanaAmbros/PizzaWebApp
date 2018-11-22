@@ -9,6 +9,7 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { CustomFooterComponent } from './custom-footer/custom-footer.component';
 
 import { HttpClientModule }   from '@angular/common/http';
+import { FormPopupComponent } from './shared/popup/form-popup/form-popup.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule }   from '@angular/common/http';
     ProductsComponent,
     RestaurantsComponent,
     CustomFooterComponent,
+    FormPopupComponent,
   ],
   imports: [
     BrowserModule,
