@@ -84,6 +84,11 @@ button {
     justify-content: space-between;
 }
 
+.no_products {
+    text-align: center;
+    font-weight: bold;
+}
+
 
 .card {
     // height: 445px;
@@ -106,10 +111,13 @@ button {
         padding: 0 12px; 
 
         &__title {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 20px;
             font-weight: bold;
             margin: 21px 0px 12px;
+            min-height: 45px;
         }
 
         &__ing {
