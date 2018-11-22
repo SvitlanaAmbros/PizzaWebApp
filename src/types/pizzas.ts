@@ -1,10 +1,7 @@
 export module pizzasInfo{
-
-
-
     export module db {
         export interface Pizzas {
-            pizzas: PizzaInfo[];
+            pizzas: PizzaInfo[][];
         }
 
         export interface PizzaInfo {
@@ -13,11 +10,13 @@ export module pizzasInfo{
             ingridients: string[];
             pricePerWeight: PricePerWeight[];
             imgUrl: string;
+            selectedPrice?: number;
         }
 
         export interface PricePerWeight {
             size: number;
             price: number;
+            isChecked?: boolean;
         }
     }
 } 

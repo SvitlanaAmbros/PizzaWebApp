@@ -126,6 +126,7 @@ button {
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
             font-size: 20px;
             font-weight: bold;
             margin: 21px 0px 12px;
@@ -135,6 +136,7 @@ button {
         &__ing {
             font-size: 16px;
             font-weight: 600;
+            min-height: 56px;
         }
     }
  
@@ -180,4 +182,39 @@ button {
 .pizza-icon {
     height: 40px;
     widows: 40px;
+}
+
+.cart {
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+
+    &__image {
+        height: 120px;
+        width: 175px;
+        border-radius: 20px;
+    }
+
+    &__select {
+        width: 80px;
+    }
+
+    &__text {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+
+        &.name {
+            width: 127px;
+            
+        }
+
+        &.yellow {
+            color: #ff9c00;
+        }
+    }
 }

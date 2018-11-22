@@ -29,7 +29,7 @@
       <div class="products">
         <div class="row d-flex justify-content-between">
           <!-- card info -->
-          <div class="col-lg-4" *ngFor="let pizza of pizzasInfo">
+          <div class="col-lg-4" *ngFor="let pizza of pizzasData">
             <div class="card" >
               <div [ngStyle]="{'background-image': 'url(../../assets/img' + pizza.imgUrl + ')',
               'height':'200px', 'border-radius':'6px'}">
@@ -47,7 +47,9 @@
                   <p class="card__price__value"> {{ portion.price }} грн</p>
               </div>
               <div>
-                <button class="card__order-btn align-bottom">Заказать</button>
+                <button 
+                  class="card__order-btn align-bottom"
+                  (click)="addPizzaInCart(pizza)">Заказать</button>
               </div>
             </div>
           </div>
@@ -57,10 +59,10 @@
       <!-- EOF products -->
 
       <!-- buttons -->
-      <div class="buttons">
+      <!-- <div class="buttons">
         <button class="btn_scroll left"><</button>
         <button class="btn_scroll right">></button>
-      </div>
+      </div> -->
       <!-- EOF buttons -->
   </div>
   
@@ -69,10 +71,21 @@
 <form-popup *ngIf="cartPopup.isOpened"
   [header]="'Корзина'"
   [buttonAction]="'Купить'"
-  [buttonCancel]="'Отменить'"
+  [buttonCancel]="'Закрыть'"
   (onClose)="closePopup()">
 
   <div class="content">
-    12283782387
+    <div *ngFor="let pizza of pizzasInCart" class="cart__row">
+        <img src="assets/img/{{pizza.imgUrl}}" class="cart__image">
+        <p class="cart__text name">{{pizza.name}}</p>
+
+        <select class="custom-select custom-select-lg mb-3 cart__select"
+        (click)="$event.stopPropagation()"
+        (change)="updatePrice(pizza,$event.target.value)">
+            <option *ngFor="let item of pizza.pricePerWeight"  value="{{item.price}}" >{{item.size}}
+            </option>
+        </select>
+        <p class="cart__text yellow">{{pizza.selectedPrice}} грн</p>  
+    </div>
   </div>
 </form-popup>
