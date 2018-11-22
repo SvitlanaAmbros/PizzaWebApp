@@ -36,6 +36,12 @@ button {
     background: #fcc401;
 }
 
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .menu {
     display: flex;
     padding: 45px 35px;
@@ -50,6 +56,12 @@ button {
             color: #973800;
         }
     }
+}
+
+.cart-icon {
+    height: 80px;
+    margin-right: 30px;
+    cursor: pointer;
 }
 
 .buttons {

@@ -16,19 +16,19 @@ export class PopupService {
   //   this.popups = this.popups.filter(el => el.id != id);
   // }
 
-  public generateId() {
+  public generateId ( pref ) {
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    let idSize = 7;
-    let key = '';
+    let idSize = 5;
+    let key = `${pref}-`;
 
     for (let i = 0; i < idSize; i++) {
-      key += getRandomInt(0, 9);
+      key += getRandomInt(1, 5);
     }
 
     return key;
-  }
+  };
  
 }

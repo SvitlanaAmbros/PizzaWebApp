@@ -1,4 +1,5 @@
-<div class="popup-wrap {{ config.position }}">
+<div class="popup-wrap {{ config.position }}"
+     (click)="closeOutside($event)">
   <div class="popup-background"></div>
   <div class="popup">
     <!-- header -->
@@ -19,8 +20,12 @@
     <!-- buttons -->
     <div class="popup__footer align-bottom" *ngIf="!!buttonAction || !!buttonCancel">
         <div class="popup__buttons">
-            <button *ngIf="buttonCancel" class="button__cancel">{{ buttonCancel }}</button>
-            <button *ngIf="buttonAction" class="button__action">{{ buttonAction }}</button>
+            <button *ngIf="buttonCancel" 
+              class="button__cancel"
+              (click)="close()">{{ buttonCancel }}</button>
+            <button *ngIf="buttonAction" 
+              class="button__action"
+              (click)="action()">{{ buttonAction }}</button>
         </div>
     </div>
     <!-- EOF buttons -->

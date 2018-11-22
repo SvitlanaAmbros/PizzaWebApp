@@ -11,9 +11,17 @@
       <!-- EOF title -->
 
       <!-- menu -->
-      <div class="menu">
-        <p *ngFor="let item of menu" class="menu__item">{{ item }}</p>
+      <div class="menu-row">
+          <div class="menu">
+            <p *ngFor="let item of menu" class="menu__item">{{ item }}</p>
+          </div>
+          <div>
+            <img src="assets/img/cart-icon.png" alt="" 
+              class="cart-icon"
+              (click)="openPopup()">
+          </div>
       </div>
+      
       <!-- EOF menu -->
 
       <!-- products -->
@@ -58,10 +66,11 @@
   
 </div>
 
-<form-popup
+<form-popup *ngIf="cartPopup.isOpened"
   [header]="'Корзина'"
   [buttonAction]="'Купить'"
-  [buttonCancel]="'Отменить'">
+  [buttonCancel]="'Отменить'"
+  (onClose)="closePopup()">
 
   <div class="content">
     12283782387

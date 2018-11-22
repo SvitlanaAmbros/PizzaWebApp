@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PopupService } from '../../services/popup.service';
 
 @Component({
@@ -6,13 +6,16 @@ import { PopupService } from '../../services/popup.service';
   templateUrl: './form-popup.component.html',
   styleUrls: ['./form-popup.component.scss']
 })
-export class FormPopupComponent implements OnInit, OnDestroy {
-  // public generatedId: string = this.popupService.generateId();
+export class FormPopupComponent implements OnInit {
+  public generatedId: string;
 
   @Input() public position?: string;
   @Input() public header: string;
   @Input() public buttonAction: string;
   @Input() public buttonCancel: string;
+
+  @Output() public onAction = new EventEmitter<void>();
+  @Output() public onClose = new EventEmitter<void>();
 
   public config = {
     position: 'center-center' || 'center-top'
@@ -22,10 +25,7 @@ export class FormPopupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initConfig();
-  }
-
-  ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
+    this.generatedId =  this.popupService.generateId('form');
   }
 
   private initConfig() {
@@ -36,5 +36,16 @@ export class FormPopupComponent implements OnInit, OnDestroy {
 
   }
 
+  public closeOutside (event) {
+    this.onClose.emit();
+  }
+
+  public action() {
+    this.onAction.emit();
+  }
+
+  public close() {
+    this.onClose.emit();
+  }
 
 }
