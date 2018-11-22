@@ -20,10 +20,10 @@ export class ProductsComponent implements OnInit {
     private pizzasService: PizzasInfoService) { }
 
   ngOnInit() {
-    this.pizzasService.initServerInfo().then(res => {
+    // this.pizzasService.initServerInfo().then(res => {
       this.pizzasService.getPizzasList().then(data => {
         this.pizzasInfo = data;
       });
-    });
+    // });
   }
 }
