@@ -1,7 +1,7 @@
 <div class="popup-wrap {{ config.position }}"
      (click)="closeOutside($event)">
   <div class="popup-background"></div>
-  <div class="popup">
+  <div class="popup"  (click)="$event.stopPropagation()">
     <!-- header -->
     <div *ngIf="header" class="popup__header-wrap">
         <div class="popup__header">

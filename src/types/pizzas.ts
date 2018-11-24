@@ -11,6 +11,7 @@ export module pizzasInfo{
             pricePerWeight: PricePerWeight[];
             imgUrl: string;
             selectedPrice?: number;
+            quantity?: number;
         }
 
         export interface PricePerWeight {

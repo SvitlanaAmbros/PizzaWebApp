@@ -75,17 +75,38 @@
   (onClose)="closePopup()">
 
   <div class="content">
-    <div *ngFor="let pizza of pizzasInCart" class="cart__row">
-        <img src="assets/img/{{pizza.imgUrl}}" class="cart__image">
-        <p class="cart__text name">{{pizza.name}}</p>
-
-        <select class="custom-select custom-select-lg mb-3 cart__select"
-        (click)="$event.stopPropagation()"
-        (change)="updatePrice(pizza,$event.target.value)">
-            <option *ngFor="let item of pizza.pricePerWeight"  value="{{item.price}}" >{{item.size}}
-            </option>
-        </select>
-        <p class="cart__text yellow">{{pizza.selectedPrice}} грн</p>  
+    <div *ngIf="pizzasInCart.length > 0">
+        <div *ngFor="let pizza of pizzasInCart" class="cart__row">
+            <img src="assets/img/{{pizza.imgUrl}}" class="cart__image">
+            <p class="cart__text name">{{ pizza.name }}</p>
+    
+            <select class="custom-select custom-select-lg cart__select"
+            (click)="$event.stopPropagation()"
+            (change)="updatePrice(pizza,$event.target.value)">
+                <option *ngFor="let item of pizza.pricePerWeight"  value="{{item.price}}" >{{item.size}}
+                </option>
+            </select>
+            <p class="cart__text yellow">{{ pizza.selectedPrice }} грн</p> 
+            <p class="cart__text name">Количество: </p>
+            <input type="text" class="form-control cart__quantity" 
+              placeholder="" 
+              [(ngModel)]="pizza.quantity"
+              (click)="$event.stopPropagation()"
+              required> 
+             
+            <button 
+              class="cart__delete"
+              (click)="deletePizza(pizza.id)">X</button>    
+        </div>
+        <div class="cart__total-price">
+          <p>Общая сумма: <span class="yellow">{{ totalPrice }} грн </span></p>
+        </div>
     </div>
+
+    <div *ngIf="pizzasInCart.length == 0" class="cart__no-item">
+      <p>Пока нет товаров в корзине</p>
+    </div>
+
+    
   </div>
 </form-popup>

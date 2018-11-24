@@ -49,15 +49,27 @@ export class ProductsComponent implements OnInit {
     this.cartPopup.close();
   }
 
-  public addPizzaInCart(pizza: pizzasInfo.db.PizzaInfo) {
-    this.pizzasInCart.push(pizza);
-  }
-
   public initPizzasInCart () {
     this.pizzasInCart.forEach(pizza => {
         pizza.pricePerWeight[0].isChecked = true;
         pizza.selectedPrice = pizza.pricePerWeight[0].price;
     });
+  }
+
+  public addPizzaInCart(pizza: pizzasInfo.db.PizzaInfo) {
+    let pizzaAlreadyAdded: boolean = false;
+
+    this.pizzasInCart.forEach(element => {
+      if(element.id == pizza.id) {
+        element.quantity += 1;
+        pizzaAlreadyAdded = true;
+      } 
+    });
+
+    if (!pizzaAlreadyAdded) {
+      pizza.quantity = 1;
+      this.pizzasInCart.push(pizza);
+    }
   }
 
   public updatePrice(pizza: pizzasInfo.db.PizzaInfo, price) {
@@ -68,5 +80,27 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  public deletePizza(id: number) {
+    this.pizzasInCart.forEach(pizza => {
+      if (pizza.id == id) {
+        if (pizza.quantity > 1) {
+          pizza.quantity--;
+        } else {
+          this.pizzasInCart = this.pizzasInCart.filter(elem => {
+            return elem.id != id;
+          });
+        }
+      }
+    });
+  }
 
+  public get totalPrice() {
+    let price: number = 0;
+
+    this.pizzasInCart.forEach(pizza => {
+      price = price + (pizza.quantity * pizza.selectedPrice);
+    });
+
+    return price;
+  }
 }
