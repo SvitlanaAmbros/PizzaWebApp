@@ -1,4 +1,9 @@
-export module pizzasInfo{
+export module entity{
+    export interface UserInfo {
+        name: string;
+        phone: string;
+    }
+
     export module db {
         export interface Pizzas {
             pizzas: PizzaInfo[][];

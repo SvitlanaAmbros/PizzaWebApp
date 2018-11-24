@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { pizzasInfo } from '../../types/pizzas';
+import { entity } from '../../types/entity';
 import { HttpClient } from '@angular/common/http';
 import { PizzasInfoService } from '../pizzas-info.service';
 import { PopupControls, PopupControlsService } from '../shared/services/popup-controls.service';
@@ -14,11 +14,13 @@ import { PopupControls, PopupControlsService } from '../shared/services/popup-co
 export class ProductsComponent implements OnInit {
   public menu: string[] = ["Пицца", "Десерты", "Напитки"];
 
-  public pizzasData: pizzasInfo.db.Pizzas;
+  public pizzasData: entity.db.Pizzas;
   public customImg:string = '0001.JPG';
 
-  public pizzasInCart: pizzasInfo.db.PizzaInfo[] = [];
+  public pizzasInCart: entity.db.PizzaInfo[] = [];
   public cartPopup: PopupControls;
+
+  public userInfo: entity.UserInfo;
 
   constructor(private http: HttpClient, 
     private pizzasService: PizzasInfoService,
@@ -29,6 +31,11 @@ export class ProductsComponent implements OnInit {
       this.pizzasService.getPizzasList().then(data => {
         this.pizzasData = data;
       });
+
+      this.userInfo = {
+        name: '',
+        phone: ''
+      }
 
     // });
     
@@ -56,7 +63,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  public addPizzaInCart(pizza: pizzasInfo.db.PizzaInfo) {
+  public addPizzaInCart(pizza: entity.db.PizzaInfo) {
     let pizzaAlreadyAdded: boolean = false;
 
     this.pizzasInCart.forEach(element => {
@@ -72,7 +79,7 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  public updatePrice(pizza: pizzasInfo.db.PizzaInfo, price) {
+  public updatePrice(pizza: entity.db.PizzaInfo, price) {
     pizza.pricePerWeight.forEach(element => {
       if (element.price == price) {
         pizza.selectedPrice = price;
@@ -102,5 +109,10 @@ export class ProductsComponent implements OnInit {
     });
 
     return price;
+  }
+
+
+  public get isFormDisabled() {
+    return this.userInfo.name == '' || this.userInfo.phone == '';
   }
 }

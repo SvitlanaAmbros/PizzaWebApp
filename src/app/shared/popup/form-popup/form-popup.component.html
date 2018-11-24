@@ -25,6 +25,7 @@
               (click)="close()">{{ buttonCancel }}</button>
             <button *ngIf="buttonAction" 
               class="button__action"
+              [disabled]="isDisabled"
               (click)="action()">{{ buttonAction }}</button>
         </div>
     </div>

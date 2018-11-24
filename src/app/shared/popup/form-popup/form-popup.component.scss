@@ -112,5 +112,10 @@ button {
         &:hover {
             background: #e4b204;
         }
+
+        &:disabled {
+            background: #c5c5c5;
+        }
     }
 }
+

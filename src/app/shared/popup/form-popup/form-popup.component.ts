@@ -13,9 +13,12 @@ export class FormPopupComponent implements OnInit {
   @Input() public header: string;
   @Input() public buttonAction: string;
   @Input() public buttonCancel: string;
+  @Input() public isDisabled: boolean;
 
   @Output() public onAction = new EventEmitter<void>();
   @Output() public onClose = new EventEmitter<void>();
+
+
 
   public config = {
     position: 'center-center' || 'center-top'
@@ -26,6 +29,7 @@ export class FormPopupComponent implements OnInit {
   ngOnInit() {
     this.initConfig();
     this.generatedId =  this.popupService.generateId('form');
+    // this.isDisabled = true;
   }
 
   private initConfig() {
@@ -42,6 +46,7 @@ export class FormPopupComponent implements OnInit {
 
   public action() {
     this.onAction.emit();
+    console.log('action pressed');
   }
 
   public close() {
