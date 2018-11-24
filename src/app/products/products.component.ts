@@ -12,7 +12,8 @@ import { PopupControls, PopupControlsService } from '../shared/services/popup-co
 })
 
 export class ProductsComponent implements OnInit {
-  public menu: string[] = ["Пицца", "Десерты", "Напитки"];
+  public menu: string[] = ["Пицца"];
+  // , "Десерты", "Напитки"];
 
   public pizzasData: entity.db.Pizzas;
   public customImg:string = '0001.JPG';
