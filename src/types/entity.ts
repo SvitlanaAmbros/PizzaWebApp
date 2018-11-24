@@ -6,7 +6,7 @@ export module entity{
 
     export module db {
         export interface Pizzas {
-            pizzas: PizzaInfo[][];
+            pizzas: PizzaInfo[];
         }
 
         export interface PizzaInfo {
@@ -16,6 +16,7 @@ export module entity{
             pricePerWeight: PricePerWeight[];
             imgUrl: string;
             selectedPrice?: number;
+            selectedSize?: number;
             quantity?: number;
         }
 
@@ -24,5 +25,18 @@ export module entity{
             price: number;
             isChecked?: boolean;
         }
+
+        export interface Order {
+            user : UserInfo,
+            pizzas: {
+                [key: number]: PricePerWeight,
+            },
+            totalSum : number
+        }
+
+        export interface UserInfo {
+            name: string,
+            phone: string
+        }  
     }
 } 

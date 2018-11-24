@@ -4,6 +4,7 @@ import { entity } from '../../types/entity';
 import { HttpClient } from '@angular/common/http';
 import { PizzasInfoService } from '../pizzas-info.service';
 import { PopupControls, PopupControlsService } from '../shared/services/popup-controls.service';
+import { OrderCreatorService } from '../order-creator.service';
 
 @Component({
   selector: 'products',
@@ -25,7 +26,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(private http: HttpClient, 
     private pizzasService: PizzasInfoService,
-    private popupControlsService: PopupControlsService) { }
+    private popupControlsService: PopupControlsService,
+    private orderCreatorService: OrderCreatorService) { }
 
   ngOnInit() {
     // this.pizzasService.initServerInfo().then(res => {
@@ -61,6 +63,7 @@ export class ProductsComponent implements OnInit {
     this.pizzasInCart.forEach(pizza => {
         pizza.pricePerWeight[0].isChecked = true;
         pizza.selectedPrice = pizza.pricePerWeight[0].price;
+        pizza.selectedSize = pizza.pricePerWeight[0].size;
     });
   }
 
@@ -84,6 +87,7 @@ export class ProductsComponent implements OnInit {
     pizza.pricePerWeight.forEach(element => {
       if (element.price == price) {
         pizza.selectedPrice = price;
+        price.selectedSize = element.size;
       } 
     });
   }
@@ -115,5 +119,11 @@ export class ProductsComponent implements OnInit {
 
   public get isFormDisabled() {
     return this.userInfo.name == '' || this.userInfo.phone == '';
+  }
+
+  public sendOrder() {
+    
+    this.pizzasService.sendOrderedPizza(this.orderCreatorService.createOrder(
+          this.pizzasInCart, this.userInfo));
   }
 }

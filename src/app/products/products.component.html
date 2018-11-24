@@ -73,7 +73,8 @@
   [buttonAction]="'Купить'"
   [buttonCancel]="'Закрыть'"
   [isDisabled]="isFormDisabled"
-  (onClose)="closePopup()">
+  (onClose)="closePopup()"
+  (onAction)="sendOrder()">
 
   <div class="content">
     <div *ngIf="pizzasInCart.length > 0">
