@@ -153,9 +153,14 @@ ul, li,p {
     }
 
     &__item {
-        font-weight: 700;
-        font-size: 16px;
-        list-style-type: none;
+        // font-weight: 700;
+        // font-size: 16px;
+        // list-style-type: none;
+        border: none;
+        background: transparent;
+        font-size: 18px;
+        color: #ffff;
+        font-weight: bold;
     }
     
     &__item a {

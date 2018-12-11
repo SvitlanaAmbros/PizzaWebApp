@@ -1,12 +1,18 @@
-<introduction>
+<introduction 
+    (menuClick)="clicked(menu)"
+    (aboutUsClick)="clicked(aboutUs)"
+    (contactsClick)="clicked(footer)">
 </introduction>
 
-<products>
+<div #menu></div>
+<products >
 </products>
 
+<div #aboutUs></div>
 <restaurants>
 </restaurants>
 
+<div #footer></div>
 <custom-footer>
 </custom-footer>
 <router-outlet></router-outlet>
