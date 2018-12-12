@@ -18,6 +18,10 @@ export class PopupControls {
   public close() {
     this.isOpened = false;
   }
+
+  public popupIsOpened() {
+    return this.isOpened;
+  }
 }
 
 @Injectable()

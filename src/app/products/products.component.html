@@ -94,7 +94,7 @@
               placeholder="" 
               [(ngModel)]="pizza.quantity"
               (click)="$event.stopPropagation()"
-              (input)="updateOrderInLocalStorage()"
+              (input)="updateQuantityInLocalStorage()"
               pattern="[A-Za-z]{3}"> 
              
             <button 
@@ -111,12 +111,14 @@
               placeholder="Имя" 
               (click)="$event.stopPropagation()"
               [(ngModel)]="userInfo.name"
+              (input)="updateUserInfoInLocalStorage()"
               required> 
             <input type="text" class="form-control cart__user-info" 
               placeholder="Телефон" 
               type="tel"
               (click)="$event.stopPropagation()"
               [(ngModel)]="userInfo.phone"
+              (input)="updateUserInfoInLocalStorage()"
               required>
           <!-- </form> -->
         </div>

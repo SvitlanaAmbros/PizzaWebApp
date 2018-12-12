@@ -7,6 +7,10 @@ import { PopupControls, PopupControlsService } from '../shared/services/popup-co
 import { OrderCreatorService } from '../order-creator.service';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 
+const ORDER_KEY = 'order';
+const POPUP_STATE_KEY = 'popup';
+const USER_INFO_KEY = 'userInfo';
+
 @Component({
   selector: 'products',
   templateUrl: './products.component.html',
@@ -18,14 +22,13 @@ export class ProductsComponent implements OnInit {
   // , "Десерты", "Напитки"];
 
   public pizzasData: entity.db.Pizzas;
-  public customImg:string = '0001.JPG';
 
   public pizzasInCart: entity.db.PizzaInfo[] = [];
   public cartPopup: PopupControls;
 
   public userInfo: entity.UserInfo;
 
-  constructor(private http: HttpClient, 
+  constructor( 
     private pizzasService: PizzasInfoService,
     private popupControlsService: PopupControlsService,
     private orderCreatorService: OrderCreatorService,
@@ -36,29 +39,45 @@ export class ProductsComponent implements OnInit {
         this.pizzasData = data;
       });
 
-      this.pizzasInCart = this.localStorage.getFromLocalStorage();
-
-      this.userInfo = {
-        name: '',
-        phone: ''
+      this.pizzasInCart = this.localStorage.getFromLocalStorage(ORDER_KEY)|| [];
+      if (!this.localStorage.getFromLocalStorage(USER_INFO_KEY)) {
+        this.createUserInfoData();
+      }else {
+        this.userInfo = this.localStorage.getFromLocalStorage(USER_INFO_KEY);
       }
     
       this.initPopup();
   }
 
+  public createUserInfoData() {
+      this.userInfo = {
+        name: '',
+        phone: ''
+      }
+    
+  }
+
+  //activation popup
   public initPopup() {
     this.cartPopup = this.popupControlsService.create();
+
+    // let popupState = this.localStorage.getFromLocalStorage(POPUP_STATE_KEY);
+    // if (!!popupState) {
+    //   popupState ? this.cartPopup.open() : this.cartPopup.close();
+    // }
   }
 
   public openPopup(){
     this.cartPopup.open();
-
+    // this.saveInLocalStorage(POPUP_STATE_KEY, this.cartPopup.isOpened);
     this.initPizzasInCart();
   }
 
   public closePopup() {
     this.cartPopup.close();
+    // this.saveInLocalStorage(POPUP_STATE_KEY, this.cartPopup.isOpened);
   }
+//EOF popup 
 
   public initPizzasInCart () {
     this.pizzasInCart.forEach(pizza => {
@@ -83,20 +102,18 @@ export class ProductsComponent implements OnInit {
       this.pizzasInCart.push(pizza);
     }
 
-    this.updateOrderInLocalStorage();
+    this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
   }
 
   public updatePrice(pizza: entity.db.PizzaInfo, size) {
-    // console.log('!!!', size);
     pizza.pricePerWeight.forEach(element => {
       if (element.size == size) {
-        // console.log('!!!', element.price);
         pizza.selectedPrice = element.price;
         pizza.selectedSize = element.size;
       } 
     });
 
-    this.updateOrderInLocalStorage();
+    this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
   }
 
   public deletePizza(id: number) {
@@ -112,7 +129,7 @@ export class ProductsComponent implements OnInit {
       }
     });
 
-    this.updateOrderInLocalStorage();
+    this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
   }
 
   public get totalPrice() {
@@ -125,18 +142,36 @@ export class ProductsComponent implements OnInit {
     return price;
   }
 
-
   public get isFormDisabled() {
     return this.userInfo.name == '' || this.userInfo.phone == '';
   }
 
-  public sendOrder() {
-    
-    this.pizzasService.sendOrderedPizza(this.orderCreatorService.createOrder(
-          this.pizzasInCart, this.userInfo));
+  public updateQuantityInLocalStorage() {
+    this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
   }
 
-  public updateOrderInLocalStorage() {
-    this.localStorage.storeInLocalStorage(this.pizzasInCart);
+  public updateUserInfoInLocalStorage(){
+    this.saveInLocalStorage(USER_INFO_KEY, this.userInfo);
   }
+
+  public sendOrder() {
+    this.pizzasService.sendOrderedPizza(this.orderCreatorService.createOrder(
+                    this.pizzasInCart, this.userInfo))
+          .then((data: {id: string}) => {
+            alert(`Order was sent. Order number is ${data.id}`);
+            this.cartPopup.close();
+
+            this.createUserInfoData();
+            this.pizzasInCart = [];
+          })
+          .catch( err => {
+            console.log('Sending order error');
+          });
+  }
+
+  public saveInLocalStorage(key: string , data: any) {
+    this.localStorage.storeInLocalStorage(key, data);
+  }
+
+  
 }
