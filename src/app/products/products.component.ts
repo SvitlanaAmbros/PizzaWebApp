@@ -130,6 +130,11 @@ export class ProductsComponent implements OnInit {
     });
 
     this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
+
+    if (this.pizzasInCart.length == 0) {
+      this.createUserInfoData();
+      this.saveInLocalStorage(USER_INFO_KEY, this.userInfo);
+    }
   }
 
   public get totalPrice() {
