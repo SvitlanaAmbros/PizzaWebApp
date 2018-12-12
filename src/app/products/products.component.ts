@@ -151,6 +151,16 @@ export class ProductsComponent implements OnInit {
     return this.userInfo.name == '' || this.userInfo.phone == '';
   }
 
+  public get quantityPizzasInCart() {
+    let temp =  this.pizzasInCart.reduce((sum, pizza: entity.db.PizzaInfo) => {
+      return sum = sum + pizza.quantity;
+    }, 0);
+
+    // alert(temp);
+
+    return temp;
+  }
+
   public updateQuantityInLocalStorage() {
     this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
   }
@@ -168,6 +178,9 @@ export class ProductsComponent implements OnInit {
 
             this.createUserInfoData();
             this.pizzasInCart = [];
+
+            this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
+            this.saveInLocalStorage(USER_INFO_KEY, this.userInfo);
           })
           .catch( err => {
             console.log('Sending order error');

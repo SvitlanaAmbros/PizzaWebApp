@@ -1,6 +1,12 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
 p {
     margin: 0;
     padding: 0;
@@ -56,12 +62,33 @@ button {
             color: #973800;
         }
     }
+
+    &__cart {
+        display: flex;
+        align-items: flex-end;
+    }
+
+
 }
 
 .cart-icon {
     height: 80px;
     margin-right: 15px;
     cursor: pointer;
+
+    &__count {
+        height: 20px;
+        width: 20px;
+        background: #fcc401;
+        margin-left: -40px;
+        margin-top: -20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+    }
 }
 
 .buttons {

@@ -15,11 +15,15 @@
           <div class="menu">
             <p *ngFor="let item of menu" class="menu__item">{{ item }}</p>
           </div>
-          <div>
+          <div class="menu__cart">
             <img src="assets/img/cart-icon.png" alt="" 
               class="cart-icon"
               (click)="openPopup()">
+              <div class="cart-icon__count" *ngIf="quantityPizzasInCart !=0 ">
+                {{ quantityPizzasInCart }}
+              </div>
           </div>
+          
       </div>
       
       <!-- EOF menu -->
@@ -90,13 +94,13 @@
             </select>
             <p class="cart__text yellow">{{ pizza.selectedPrice }} грн</p> 
             <p class="cart__text name">Количество: </p>
-            <input type="text" class="form-control cart__quantity" 
+            <input type="number" class="form-control cart__quantity" 
               placeholder="" 
               [(ngModel)]="pizza.quantity"
               (click)="$event.stopPropagation()"
               (input)="updateQuantityInLocalStorage()"
               pattern="[A-Za-z]{3}"> 
-             
+
             <button 
               class="cart__delete"
               (click)="deletePizza(pizza.id)">X</button>    
