@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { PizzasInfoService } from '../pizzas-info.service';
 import { PopupControls, PopupControlsService } from '../shared/services/popup-controls.service';
 import { OrderCreatorService } from '../order-creator.service';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Component({
   selector: 'products',
@@ -27,22 +28,22 @@ export class ProductsComponent implements OnInit {
   constructor(private http: HttpClient, 
     private pizzasService: PizzasInfoService,
     private popupControlsService: PopupControlsService,
-    private orderCreatorService: OrderCreatorService) { }
+    private orderCreatorService: OrderCreatorService,
+    private localStorage: LocalStorageService) { }
 
   ngOnInit() {
-    // this.pizzasService.initServerInfo().then(res => {
       this.pizzasService.getPizzasList().then(data => {
         this.pizzasData = data;
       });
+
+      this.pizzasInCart = this.localStorage.getFromLocalStorage();
 
       this.userInfo = {
         name: '',
         phone: ''
       }
-
-    // });
     
-    this.initPopup();
+      this.initPopup();
   }
 
   public initPopup() {
@@ -81,15 +82,21 @@ export class ProductsComponent implements OnInit {
       pizza.quantity = 1;
       this.pizzasInCart.push(pizza);
     }
+
+    this.updateOrderInLocalStorage();
   }
 
-  public updatePrice(pizza: entity.db.PizzaInfo, price) {
+  public updatePrice(pizza: entity.db.PizzaInfo, size) {
+    // console.log('!!!', size);
     pizza.pricePerWeight.forEach(element => {
-      if (element.price == price) {
-        pizza.selectedPrice = price;
-        price.selectedSize = element.size;
+      if (element.size == size) {
+        // console.log('!!!', element.price);
+        pizza.selectedPrice = element.price;
+        pizza.selectedSize = element.size;
       } 
     });
+
+    this.updateOrderInLocalStorage();
   }
 
   public deletePizza(id: number) {
@@ -104,6 +111,8 @@ export class ProductsComponent implements OnInit {
         }
       }
     });
+
+    this.updateOrderInLocalStorage();
   }
 
   public get totalPrice() {
@@ -125,5 +134,9 @@ export class ProductsComponent implements OnInit {
     
     this.pizzasService.sendOrderedPizza(this.orderCreatorService.createOrder(
           this.pizzasInCart, this.userInfo));
+  }
+
+  public updateOrderInLocalStorage() {
+    this.localStorage.storeInLocalStorage(this.pizzasInCart);
   }
 }

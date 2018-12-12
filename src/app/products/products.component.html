@@ -85,7 +85,7 @@
             <select class="custom-select custom-select-lg cart__select"
             (click)="$event.stopPropagation()"
             (change)="updatePrice(pizza,$event.target.value)">
-                <option *ngFor="let item of pizza.pricePerWeight"  value="{{item.price}}" >{{item.size}}
+                <option *ngFor="let item of pizza.pricePerWeight"  value="{{item.size}}" >{{item.size}}
                 </option>
             </select>
             <p class="cart__text yellow">{{ pizza.selectedPrice }} грн</p> 
@@ -94,6 +94,7 @@
               placeholder="" 
               [(ngModel)]="pizza.quantity"
               (click)="$event.stopPropagation()"
+              (input)="updateOrderInLocalStorage()"
               pattern="[A-Za-z]{3}"> 
              
             <button 

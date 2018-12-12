@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ import { PizzasInfoService } from './pizzas-info.service';
     AppRoutingModule, 
     HttpClientModule, 
     SharedModule, 
-    FormsModule
+    FormsModule,
+    StorageServiceModule
   ],
   providers: [PizzasInfoService],
   bootstrap: [AppComponent]
