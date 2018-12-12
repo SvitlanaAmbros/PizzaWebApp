@@ -35,9 +35,13 @@
           <!-- card info -->
           <div class="col-lg-4" *ngFor="let pizza of pizzasData">
             <div class="card" >
-              <div [ngStyle]="{'background-image': 'url(../../assets/img' + pizza.imgUrl + ')',
+              <!-- <div [ngStyle]="{'background-image': 'url(../../assets/img' + pizza.imgUrl + ')',
               'height':'200px', 'border-radius':'6px'}">
+              </div> -->
+              <div [ngStyle]="{'background-image': 'url(http://localhost:8080/' + pizza.imgUrl +')',
+              'height':'200px', 'border-radius':'6px', 'background-size': '310px 212px'}">
               </div>
+              <!-- <img src="http://localhost:8080/0001.jpg" class="cart__image"> -->
               <div class="card__pizza">
                 <p class="card__pizza__title">{{ pizza.name}}</p>
                 <p class="card__pizza__ing"><span 
@@ -83,7 +87,8 @@
   <div class="content">
     <div *ngIf="pizzasInCart.length > 0">
         <div *ngFor="let pizza of pizzasInCart" class="cart__row">
-            <img src="assets/img/{{pizza.imgUrl}}" class="cart__image">
+            <!-- <img src="assets/img/{{pizza.imgUrl}}" class="cart__image"> -->
+            <img src="http://localhost:8080/{{pizza.imgUrl}}" class="cart__image">
             <p class="cart__text name">{{ pizza.name }}</p>
     
             <select class="custom-select custom-select-lg cart__select"
@@ -132,6 +137,5 @@
       <p>Пока нет товаров в корзине</p>
     </div>
 
-    
   </div>
 </form-popup>

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 import { AppComponent } from './app.component';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { ProductsComponent } from './products/products.component';
@@ -13,6 +14,7 @@ import { CustomFooterComponent } from './custom-footer/custom-footer.component';
 import { HttpClientModule }   from '@angular/common/http';
 import { SharedModule } from './shared/shared.module.';
 import { PizzasInfoService } from './pizzas-info.service';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { PizzasInfoService } from './pizzas-info.service';
     HttpClientModule, 
     SharedModule, 
     FormsModule,
-    StorageServiceModule
+    StorageServiceModule,
+    DeferLoadModule
   ],
   providers: [PizzasInfoService],
   bootstrap: [AppComponent]
