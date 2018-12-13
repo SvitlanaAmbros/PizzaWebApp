@@ -70,7 +70,8 @@ export class ProductsComponent implements OnInit {
   public openPopup(){
     this.cartPopup.open();
     // this.saveInLocalStorage(POPUP_STATE_KEY, this.cartPopup.isOpened);
-    this.initPizzasInCart();
+    
+    // this.initPizzasInCart();
   }
 
   public closePopup() {
@@ -81,9 +82,9 @@ export class ProductsComponent implements OnInit {
 
   public initPizzasInCart () {
     this.pizzasInCart.forEach(pizza => {
-        pizza.pricePerWeight[0].isChecked = true;
-        pizza.selectedPrice = pizza.pricePerWeight[0].price;
-        pizza.selectedSize = pizza.pricePerWeight[0].size;
+        // pizza.pricePerWeight[0].isChecked = true;
+        
+        
     });
   }
 
@@ -102,14 +103,16 @@ export class ProductsComponent implements OnInit {
       this.pizzasInCart.push(pizza);
     }
 
+    this.initPizzasInCart();
+
     this.saveInLocalStorage(ORDER_KEY, this.pizzasInCart);
   }
 
   public updatePrice(pizza: entity.db.PizzaInfo, size) {
     pizza.pricePerWeight.forEach(element => {
-      if (element.size == size) {
+      if (element.size == pizza.selectedSize) {
         pizza.selectedPrice = element.price;
-        pizza.selectedSize = element.size;
+        // pizza.selectedSize = element.size;
       } 
     });
 
@@ -152,13 +155,9 @@ export class ProductsComponent implements OnInit {
   }
 
   public get quantityPizzasInCart() {
-    let temp =  this.pizzasInCart.reduce((sum, pizza: entity.db.PizzaInfo) => {
+    return  this.pizzasInCart.reduce((sum, pizza: entity.db.PizzaInfo) => {
       return sum = sum + pizza.quantity;
     }, 0);
-
-    // alert(temp);
-
-    return temp;
   }
 
   public updateQuantityInLocalStorage() {

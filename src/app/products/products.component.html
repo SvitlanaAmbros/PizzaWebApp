@@ -90,11 +90,12 @@
             <!-- <img src="assets/img/{{pizza.imgUrl}}" class="cart__image"> -->
             <img src="http://localhost:8080/{{pizza.imgUrl}}" class="cart__image">
             <p class="cart__text name">{{ pizza.name }}</p>
-    
-            <select class="custom-select custom-select-lg cart__select"
-            (click)="$event.stopPropagation()"
-            (change)="updatePrice(pizza,$event.target.value)">
-                <option *ngFor="let item of pizza.pricePerWeight"  value="{{item.size}}" >{{item.size}}
+            <select 
+              class="custom-select custom-select-lg cart__select"
+              (click)="$event.stopPropagation()"
+              [(ngModel)]="pizza.selectedSize"
+              (change)="updatePrice(pizza,$event.target.value)">
+                <option *ngFor="let item of pizza.pricePerWeight"  [ngValue]="item.size" >{{item.size}}
                 </option>
             </select>
             <p class="cart__text yellow">{{ pizza.selectedPrice }} грн</p> 
@@ -103,8 +104,7 @@
               placeholder="" 
               [(ngModel)]="pizza.quantity"
               (click)="$event.stopPropagation()"
-              (input)="updateQuantityInLocalStorage()"
-              pattern="[A-Za-z]{3}"> 
+              (input)="updateQuantityInLocalStorage()"> 
 
             <button 
               class="cart__delete"
@@ -128,6 +128,7 @@
               (click)="$event.stopPropagation()"
               [(ngModel)]="userInfo.phone"
               (input)="updateUserInfoInLocalStorage()"
+              pattern="[A-Za-z]{3}"
               required>
           <!-- </form> -->
         </div>
